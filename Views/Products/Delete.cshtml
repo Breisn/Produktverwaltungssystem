@@ -1,0 +1,45 @@
+﻿@model ProductManagementSystem.Models.Product
+
+@{
+    ViewData["Title"] = "Produkt löschen";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Sind Sie sicher, dass Sie dieses Produkt löschen möchten?</h3>
+<div>
+    <h4>Produkt</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="ProductID" />
+        <button type="submit" class="btn btn-danger">Löschen bestätigen</button>
+        <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+    </form>
+</div>
