@@ -1,4 +1,4 @@
-﻿@model ProductManagementSystem.Models.Product
+﻿@model ProductManagementSystem.ViewModels.ProductViewModel
 
 @{
     ViewData["Title"] = "Produkt bearbeiten";
@@ -6,25 +6,48 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" asp-controller="Products" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="ProductID" />
+    
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
+        <label asp-for="Name" class="control-label">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Price" class="control-label">Preis</label>
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Quantity" class="control-label">Menge</label>
         <input asp-for="Quantity" class="form-control" />
         <span asp-validation-for="Quantity" class="text-danger"></span>
     </div>
-    <br />
+
+    <div class="form-group">
+        <label for="images" class="control-label">Bilder hinzufügen</label>
+        <input type="file" class="form-control-file" id="Images" name="Images" multiple>
+    </div>
+
+    @if (Model.ProductImages != null && Model.ProductImages.Any())
+    {
+        <div class="existing-images">
+            <h4>Vorhandene Bilder</h4>
+            @foreach (var image in Model.ProductImages)
+            {
+                <div class="existing-image">
+                    <p>@image.FileName</p>
+                    <img src="@Url.Content(image.ImagePath)" alt="Produktbild" style="max-width: 50%; margin-bottom: 10px;">
+                </div>
+            }
+        </div>
+    }
+
     <button type="submit" class="btn btn-success">Aktualisieren</button>
 </form>
+
 <br />
-<a asp-action="Index" class="btn btn-primary">Zurück zur Liste</a>
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">Zurück zur Liste</a>

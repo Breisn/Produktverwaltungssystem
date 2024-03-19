@@ -5,24 +5,25 @@
 namespace ProductManagementSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateProductModel : Migration
+    public partial class RemoveFirstImagePath : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Products",
-                newName: "ProductID");
+            migrationBuilder.DropColumn(
+                name: "FirstImagePath",
+                table: "Products");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ProductID",
+            migrationBuilder.AddColumn<string>(
+                name: "FirstImagePath",
                 table: "Products",
-                newName: "Id");
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
     }
 }

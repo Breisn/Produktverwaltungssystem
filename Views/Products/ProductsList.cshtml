@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ProductManagementSystem.ViewModels.ProductViewModel>
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">ProduktID: @product.ProductID</p>
+                        <p class="card-text">Preis: @product.Price.ToString("C")</p>
+                        <p class="card-text">Menge: @product.Quantity</p>
+                        @if (product.ProductImages.Any())
+                        {
+                            var firstImage = product.ProductImages.First();
+                            <img src="@Url.Content(firstImage.ImagePath)" class="card-img-bottom" alt="Produktbild" style="width:100%;height:auto;">
+                        }
+                        else
+                        {
+                            <p>Kein Bild verfügbar</p>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Edit", "Products", new { id = product.ProductID })" class="btn btn-primary">Bearbeiten</a>
+                        <a href="@Url.Action("Details", "Products", new { id = product.ProductID })" class="btn btn-secondary">Details</a>
+                        <a href="@Url.Action("Delete", "Products", new { id = product.ProductID })" class="btn btn-danger">Löschen</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div>Keine Produkte gefunden</div>
+}

@@ -36,10 +36,10 @@
             @Html.DisplayFor(model => model.Quantity)
         </dd>
     </dl>
-
-    <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="ProductID" />
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" name="id" value="@Model.ProductID" />
         <button type="submit" class="btn btn-danger">Löschen bestätigen</button>
-        <a asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Abbrechen</a>
     </form>
 </div>
+

@@ -12,11 +12,15 @@ namespace ProductManagementSystem.Models
         public string Name { get; set; }
 
         [Display(Name = "Preis")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Display(Name = "Menge")]
         public int Quantity {  get; set; }
         public DateTime CreationDate { get; set; }
+
+        public List<ProductImage> ProductImages{ get; set; }
+
     }
 
 }

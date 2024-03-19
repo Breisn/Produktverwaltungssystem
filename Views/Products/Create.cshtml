@@ -1,14 +1,14 @@
-﻿@model ProductManagementSystem.Models.Product
+﻿@model ProductManagementSystem.ViewModels.ProductViewModel
 
 @{
     ViewData["Title"] = "Produkt hinzufügen";
 }
-
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create">
+<form asp-controller="Products" asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
+        <label asp-for="Name" class="control-label">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
@@ -21,9 +21,12 @@
         <label asp-for="Quantity" class="control-label">Menge</label>
         <input asp-for="Quantity" class="form-control" />
         <span asp-validation-for="Quantity" class="text-danger"></span>
-        <br />
     </div>
-    <button type="submit" class="btn btn-primary">Speichern</button>
+    <div id="imagesSection">
+        <div class="form-group">
+            <label class="form-label">Bild hochladen</label>
+            <input type="file" class="form-control-file" name="Images" multiple>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Speichern</button>
 </form>
-<br />
-<a asp-action="Index" class="btn btn-primary">Zurück zur Liste</a>

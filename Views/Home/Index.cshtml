@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ProductManagementSystem.ViewModels.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Produktübersicht";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<div class="container mt-3">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <form id="searchForm" asp-action = "Index" class="form-inline">
+        <div class="input-group">
+            <div style="width: 150px;">
+                <select class="form-control form-control-sm" name="searchOption" aria-label="Suchkriterium">
+                    <option value="Name">Name</option>
+                    <option value="ID">ID</option>
+                </select>
+            </div>
+            <input type="text" class="form-control form-control-sm" name="searchString" placeholder="Suchbegriff eingeben" aria-label="Suchbegriff">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-sm">Suche</button>
+            </div>
+        </div>
+    </form>
+    <br />
+
+    <div id="productsList">
+        @await Html.PartialAsync("../Products/ProductsList", Model)
+    </div>
+</div>
+
+<a asp-controller="Products" asp-action="Create" class="btn btn-success">
+    <i class="fas fa-plus-circle"></i> Produkt hinzufügen
+</a>
+
+
+
